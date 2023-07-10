@@ -3,6 +3,7 @@ Hanami.app.register_provider :legacy, namespace: true do
     require "rom"
 
     config = ROM::Configuration.new(:sql, target["settings"].legacy_database_url)
+    config.gateways[:default].use_logger(Logger.new($stdout))
 
     register "config", config
     register "db", config.gateways[:default].connection
